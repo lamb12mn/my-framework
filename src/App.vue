@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useAppStore } from './store/modules';
+import { antdLocales } from './locales/antd';
 // import HelloWorld from './components/HelloWorld.vue'
+
+const appStore = useAppStore();
+const antdLocale = computed(() => {
+  return antdLocales[appStore.locale];
+});
 </script>
 
 <template>
@@ -10,7 +18,7 @@
 		|
 		<router-link to="/other">other</router-link>
 	</nav>
-	<a-config-provider>
+	<a-config-provider :locale="antdLocale">
 		<router-view></router-view>
 	</a-config-provider>
 	<!-- <div>
